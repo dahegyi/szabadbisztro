@@ -1,0 +1,156 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+@font-face {
+  font-family: "Urania Czech";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Urania Czech"), url("./Urania_Czech.woff") format("woff");
+}
+
+$bg-text-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
+
+body {
+  font-family: "Urania Czech", "Roboto Mono", monospace;
+  font-size: 1.2rem;
+  color: #000;
+
+  @include media-breakpoint-down(md) {
+    font-size: 1rem;
+  }
+}
+
+a,
+a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.navbar-dark .navbar-nav {
+  width: 100%;
+  font-size: 1.4rem;
+  float: none;
+  margin: 12px auto;
+  display: block;
+  text-align: center;
+
+  .nav-link {
+    float: none;
+    display: inline-block;
+    min-width: 160px;
+    text-shadow: $bg-text-shadow;
+    color: #fff;
+    &:hover {
+      color: #ff6;
+    }
+
+    @include media-breakpoint-down(lg) {
+      display: block;
+    }
+
+    img {
+      margin: 0 8px;
+    }
+  }
+}
+
+.bg {
+  min-height: 100vh;
+  max-width: 100%;
+  top: 0;
+  z-index: -1;
+  box-shadow: inset 0 0 0 5000px rgba(0, 0, 0, 0.6);
+  color: #fff;
+  background-size: cover;
+  background-position: center;
+  padding: 0;
+
+  h1 {
+    position: absolute;
+    width: 100%;
+    top: 40vh;
+    text-align: center;
+    text-shadow: $bg-text-shadow;
+  }
+}
+
+.carousel-inner {
+  padding: 2rem 10rem;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+
+  @include media-breakpoint-down(md) {
+    padding: 2rem 5rem;
+    min-height: 450px;
+  }
+
+  @include media-breakpoint-down(md) {
+    min-height: 600px;
+  }
+}
+
+.contact-container {
+  background: #222;
+  text-align: center;
+  color: #fff;
+  padding: 4rem 1rem;
+  font-size: 1.4rem;
+
+  @include media-breakpoint-down(md) {
+    font-size: 1.2rem;
+  }
+}
+
+.footer {
+  width: 100%;
+  color: #ddd;
+  text-align: center;
+
+  .icon {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-size: 100%;
+    margin: 0 4px;
+  }
+
+  &.footer-light {
+    height: 100px;
+    background: #333;
+    padding: 30px;
+  }
+
+  &.footer-dark {
+    min-height: 180px;
+    background: #222;
+    padding: 55px;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .position-absolute {
+    position: relative;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 100;
+  }
+}
+
+.spinner {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation-name: spin;
+  animation-duration: 1800ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
