@@ -28,7 +28,6 @@ function App() {
           <Content cms={data} />
           <MediaSlideshow cms={data} />
           <Footer cms={data} />
-          {currentLanguage}
         </>
       )}
     </>
