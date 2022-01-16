@@ -1,5 +1,7 @@
 import { PrismicRichText } from "@prismicio/react";
-import { Col, Container, Row } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const ContentView = (props) => {
   const { cms } = props;
@@ -22,6 +24,7 @@ const ContentView = (props) => {
             <img src={cms?.menu_image_right.url} alt="" width="100%" />
           </Col>
         </Row>
+        <img src={cms?.menu_image_bottom.url} alt="" width="100%" />
         <PrismicRichText field={cms?.plant_based_disclaimer} />
       </Container>
       <div id="contact" className="contact-container">

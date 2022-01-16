@@ -1,6 +1,6 @@
+import { PrismicRichText } from "@prismicio/react";
 import Container from "react-bootstrap/Container";
 import Carousel from "react-bootstrap/Carousel";
-import { PrismicRichText } from "@prismicio/react";
 
 const MediaSlideshowView = (props) => {
   const { cms } = props;
