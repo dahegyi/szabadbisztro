@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useSinglePrismicDocument } from "@prismicio/react";
 
@@ -10,6 +11,12 @@ import Footer from "./components/footer";
 import "./App.scss";
 
 function App() {
+  useEffect(() => {
+    if (data) {
+      document.title = `${data.app_title} - ${data.app_title_description}`;
+    }
+  });
+
   const currentLanguage = useSelector((state) => state.languageSwitch.language);
 
   const [cms, { state }] = useSinglePrismicDocument("szabad_bisztro", {
