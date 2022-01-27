@@ -10,9 +10,12 @@
 $bg-text-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
 
 body {
+  margin: 0;
   font-family: "Urania Czech", "Roboto Mono", monospace;
   font-size: 1.2rem;
   color: #000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   @include media-breakpoint-down(md) {
     font-size: 1rem;
@@ -33,6 +36,10 @@ a:hover {
   display: block;
   text-align: center;
 
+  @include media-breakpoint-down(lg) {
+    display: flex;
+  }
+
   .nav-link {
     float: none;
     display: inline-block;
@@ -44,7 +51,9 @@ a:hover {
     }
 
     @include media-breakpoint-down(lg) {
-      display: block;
+      &:nth-child(3) {
+        order: -1;
+      }
     }
 
     img {
@@ -53,12 +62,11 @@ a:hover {
   }
 }
 
-.bg {
-  min-height: 100vh;
+.banner {
+  height: 100vh;
   max-width: 100%;
   top: 0;
   z-index: -1;
-  box-shadow: inset 0 0 0 5000px rgba(0, 0, 0, 0.6);
   color: #fff;
   background-size: cover;
   background-position: center;
@@ -70,10 +78,27 @@ a:hover {
     top: 40vh;
     text-align: center;
     text-shadow: $bg-text-shadow;
+    z-index: 1;
+  }
+
+  .carousel {
+    z-index: -2;
+
+    .carousel-inner {
+      height: 100vh;
+
+      img {
+        width: 100%;
+        min-height: 200vh;
+        object-fit: cover;
+        filter: brightness(45%);
+        transform: translateY(-50vh);
+      }
+    }
   }
 }
 
-.carousel-inner {
+#media .carousel-inner {
   padding: 2rem 10rem;
   min-height: 400px;
   display: flex;
@@ -89,15 +114,29 @@ a:hover {
   }
 }
 
-.contact-container {
-  background: #222;
+.contact-container,
+.opening-hours {
   text-align: center;
   color: #fff;
   padding: 4rem 1rem;
+}
+
+.contact-container {
+  background: #222;
   font-size: 1.4rem;
 
   @include media-breakpoint-down(md) {
     font-size: 1.2rem;
+  }
+}
+
+.opening-hours {
+  background: #333;
+  font-size: 1.2rem;
+  z-index: 10;
+
+  @include media-breakpoint-down(md) {
+    font-size: 1rem;
   }
 }
 
@@ -141,9 +180,13 @@ a:hover {
   justify-content: center;
   align-items: center;
   animation-name: spin;
-  animation-duration: 1800ms;
+  animation-duration: 1400ms;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
+
+  img {
+    width: 100px;
+  }
 }
 
 @keyframes spin {

@@ -6,7 +6,7 @@ const MediaSlideshowView = (props) => {
   const { cms } = props;
 
   return (
-    <Container>
+    <Container id="media">
       <Carousel variant="dark">
         {cms?.articles.map((article, index) => (
           <Carousel.Item key={index}>

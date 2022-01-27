@@ -5,11 +5,6 @@ import SlideshowView from "./slideshow-view";
 const Slideshow = (props) => {
   const { cms } = props;
 
-  // Select random images
-  const imgs = cms?.slideshow_images;
-  const randomSlideshowImage =
-    imgs && imgs[Math.floor(Math.random() * imgs.length)].slideshow_image;
-
   // Select random texts
   const texts = cms?.slideshow_texts;
   const textsLength = texts?.length;
@@ -31,7 +26,6 @@ const Slideshow = (props) => {
   return (
     <SlideshowView
       cms={cms}
-      slideshowImage={randomSlideshowImage}
       slideshowTexts={randomSlideshowTexts}
       dispatch={dispatch}
     />

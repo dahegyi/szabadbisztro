@@ -24,12 +24,22 @@ const ContentView = (props) => {
             <img src={cms?.menu_image_right.url} alt="" width="100%" />
           </Col>
         </Row>
-        <img src={cms?.menu_image_bottom.url} alt="" width="100%" />
+        <img
+          src={cms?.menu_image_bottom.url}
+          alt=""
+          width="100%"
+          className="mb-5"
+        />
         <PrismicRichText field={cms?.plant_based_disclaimer} />
       </Container>
       <div id="contact" className="contact-container">
         <PrismicRichText field={cms?.table_reservation_title} />
         <a href={`tel:${cms?.phone_number}`}>{cms?.phone_number}</a>
+      </div>
+      <div className="opening-hours">
+        <PrismicRichText field={cms?.opening_hours_title} />
+
+        <PrismicRichText field={cms?.opening_hours_content} />
       </div>
     </>
   );
