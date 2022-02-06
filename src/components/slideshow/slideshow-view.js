@@ -1,11 +1,14 @@
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
 import { switchLanguage } from "../../reducers/language-switcher";
 
 const SlideshowView = (props) => {
-  const { cms, slideshowTexts, dispatch } = props;
+  const { cms, slideshowImage, slideshowTexts, dispatch } = props;
+
+  const slideshowStyles = {
+    backgroundImage: `url(${slideshowImage?.url})`,
+  };
 
   return (
     <>
@@ -29,19 +32,13 @@ const SlideshowView = (props) => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Container className="banner">
+
+      <Container className="banner" style={slideshowStyles}>
         <h1>
           {slideshowTexts[0]}
           <br />
           {slideshowTexts[1]}
         </h1>
-        <Carousel controls={false} fade={true} indicators={false} interval={10000}>
-          {cms?.slideshow_images.map((image, index) => (
-            <Carousel.Item key={index}>
-              <img src={image.slideshow_image.url} alt="" />
-            </Carousel.Item>
-          ))}
-        </Carousel>
       </Container>
     </>
   );
