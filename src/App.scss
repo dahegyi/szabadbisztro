@@ -39,7 +39,7 @@ a:hover {
   @include media-breakpoint-down(lg) {
     display: flex;
 
-    &:nth-child(3) {
+    .nav-link:nth-child(3) {
       order: -1;
     }
   }
@@ -94,6 +94,32 @@ a:hover {
   }
 }
 
+#about {
+  background-image: url("./plant.png");
+  background-position: bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  h1 {
+    margin-bottom: 2rem;
+  }
+
+  p {
+    padding: 0 6rem;
+    text-align: justify;
+
+    @include media-breakpoint-down(md) {
+      padding: 0;
+    }
+  }
+}
+
+.slideshow-item img {
+  max-height: 90vh;
+  width: 100%;
+  object-fit: cover;
+}
+
 .contact-container,
 .opening-hours {
   text-align: center;
@@ -105,8 +131,33 @@ a:hover {
   background: #222;
   font-size: 1.4rem;
 
+  a {
+    text-decoration: underline;
+  }
+
   @include media-breakpoint-down(md) {
     font-size: 1.2rem;
+  }
+}
+
+.carousel {
+  &.video .carousel-indicators {
+    bottom: -50px;
+  }
+
+  .iframe {
+    display: flex;
+    width: 75%;
+    height: calc(100vw / 3);
+    margin: 0 auto;
+
+    @include media-breakpoint-down(md) {
+      height: calc(100vw / 2);
+    }
+  }
+
+  a {
+    text-decoration: underline;
   }
 }
 
