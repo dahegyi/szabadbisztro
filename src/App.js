@@ -16,10 +16,8 @@ function App() {
     }
   });
 
-  const currentLanguage = useSelector((state) => state.languageSwitch.language);
-
   const [cms, { state }] = useSinglePrismicDocument("szabad_bisztro", {
-    lang: currentLanguage,
+    lang: useSelector((state) => state.languageSwitch.language),
   });
 
   const data = cms?.data;
