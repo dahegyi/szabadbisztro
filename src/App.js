@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useSinglePrismicDocument } from "@prismicio/react";
 
-import Loading from "./components/loading";
 import Slideshow from "./components/slideshow";
 import Content from "./components/content";
 import MediaSlideshow from "./components/media-slideshow";
@@ -28,7 +27,9 @@ function App() {
   return (
     <>
       {state === "loading" ? (
-        <Loading />
+        <div className="spinner">
+          <img src="./loading.png" alt="nyugi" />
+        </div>
       ) : (
         <>
           <Slideshow cms={data} />
