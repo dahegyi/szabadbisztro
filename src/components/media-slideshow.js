@@ -2,7 +2,7 @@ import { PrismicRichText } from "@prismicio/react";
 import Container from "react-bootstrap/Container";
 import Carousel from "react-bootstrap/Carousel";
 
-const MediaSlideshowView = (props) => {
+const MediaSlideshow = (props) => {
   const { cms } = props;
 
   return (
@@ -21,4 +21,4 @@ const MediaSlideshowView = (props) => {
   );
 };
 
-export default MediaSlideshowView;
+export default MediaSlideshow;

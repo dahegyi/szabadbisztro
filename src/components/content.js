@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Carousel from "react-bootstrap/Carousel";
 
-const ContentView = (props) => {
+const Content = (props) => {
   const { cms } = props;
 
   return (
@@ -37,10 +37,20 @@ const ContentView = (props) => {
         </div>
         <Row className="mb-5">
           <Col sm="12" md="6">
-            <img src={cms?.menu_image_left.url} alt="" width="100%" loading="lazy" />
+            <img
+              src={cms?.menu_image_left.url}
+              alt=""
+              width="100%"
+              loading="lazy"
+            />
           </Col>
           <Col sm="12" md="6">
-            <img src={cms?.menu_image_right.url} alt="" width="100%" loading="lazy" />
+            <img
+              src={cms?.menu_image_right.url}
+              alt=""
+              width="100%"
+              loading="lazy"
+            />
           </Col>
         </Row>
         {cms?.menu_image_bottom?.url ? (
@@ -98,4 +108,4 @@ const ContentView = (props) => {
   );
 };
 
-export default ContentView;
+export default Content;

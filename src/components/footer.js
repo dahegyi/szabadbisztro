@@ -1,6 +1,6 @@
 import Container from "react-bootstrap/Container";
 
-const FooterView = (props) => {
+const Footer = (props) => {
   const { cms } = props;
 
   return (
@@ -11,14 +11,24 @@ const FooterView = (props) => {
           target="_blank"
           rel="noreferrer"
         >
-          <img src="/facebook.png" alt="Facebook" className="icon" loading="lazy" />
+          <img
+            src="/facebook.png"
+            alt="Facebook"
+            className="icon"
+            loading="lazy"
+          />
         </a>
         <a
           href="https://instagram.com/szabad_vegan_bistro"
           target="_blank"
           rel="noreferrer"
         >
-          <img src="/instagram.png" alt="Instagram" className="icon" loading="lazy" />
+          <img
+            src="/instagram.png"
+            alt="Instagram"
+            className="icon"
+            loading="lazy"
+          />
         </a>
         <a
           href="mailto:szabadbisztro@gmail.com"
@@ -44,4 +54,4 @@ const FooterView = (props) => {
   );
 };
 
-export default FooterView;
+export default Footer;

@@ -1,14 +1,38 @@
+import { useDispatch } from "react-redux";
+
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
-import { switchLanguage } from "../../reducers/language-switcher";
+import { switchLanguage } from "../reducers/language-switcher";
 
-const SlideshowView = (props) => {
-  const { cms, slideshowImage, slideshowTexts, dispatch } = props;
+const Slideshow = (props) => {
+  const { cms } = props;
 
+  // Select and set random images as a style
+  const imgs = cms?.slideshow_images;
+  const slideshowImage =
+    imgs && imgs[Math.floor(Math.random() * imgs.length)].slideshow_image;
   const slideshowStyles = {
     backgroundImage: `url(${slideshowImage?.url})`,
   };
+
+  // Select random texts
+  const texts = cms?.slideshow_texts;
+  const textsLength = texts?.length;
+
+  let rand1 = Math.floor(Math.random() * textsLength);
+  let rand2 = rand1;
+
+  while (rand1 === rand2) {
+    rand2 = Math.floor(Math.random() * textsLength);
+  }
+
+  const slideshowTexts = [
+    texts && texts[rand1].text,
+    texts && texts[rand2].text,
+  ];
+
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -44,4 +68,4 @@ const SlideshowView = (props) => {
   );
 };
 
-export default SlideshowView;
+export default Slideshow;
