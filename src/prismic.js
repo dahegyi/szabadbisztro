@@ -1,7 +1,6 @@
 import * as prismic from "@prismicio/client";
 
-export const repositoryName = "szabad";
-const endpoint = prismic.getEndpoint(repositoryName);
+const endpoint = prismic.getEndpoint("szabad");
 
 export const client = prismic.createClient(endpoint, {
   routes: [],
