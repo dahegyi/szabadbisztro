@@ -14,6 +14,7 @@ const Slideshow = (props) => {
     imgs && imgs[Math.floor(Math.random() * imgs.length)].slideshow_image;
   const slideshowStyles = {
     backgroundImage: `url(${slideshowImage?.url})`,
+    height: 0.8 * window.innerHeight,
   };
 
   // Select random texts
@@ -58,7 +59,7 @@ const Slideshow = (props) => {
       </Navbar>
 
       <Container className="banner" style={slideshowStyles}>
-        <h1>
+        <h1 style={{ top: 0.35 * window.innerHeight }}>
           {slideshowTexts[0]}
           <br />
           {slideshowTexts[1]}

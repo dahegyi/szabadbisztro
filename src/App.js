@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useSinglePrismicDocument } from "@prismicio/react";
 
@@ -10,6 +10,8 @@ import Footer from "./components/footer";
 import "./App.scss";
 
 function App() {
+  const [restaurant, setRestaurant] = useState(0);
+
   useEffect(() => {
     if (data) {
       document.title = `${data.app_title} - ${data.app_title_description}`;
@@ -25,15 +27,21 @@ function App() {
   return (
     <>
       {state === "loading" ? (
-        <div className="spinner">
-          <img src="./loading.png" alt="nyugi" />
-        </div>
+        <img src="./lec.gif" className="loading" alt="nyugi..." />
       ) : (
         <>
           <Slideshow cms={data} />
-          <Content cms={data} />
+          <Content
+            cms={data}
+            restaurant={restaurant}
+            setRestaurant={setRestaurant}
+          />
           <MediaSlideshow cms={data} />
-          <Footer cms={data} />
+          <Footer
+            cms={data}
+            restaurant={restaurant}
+            setRestaurant={setRestaurant}
+          />
         </>
       )}
     </>
