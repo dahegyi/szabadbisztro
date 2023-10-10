@@ -1,0 +1,39 @@
+name: Deploy to Firebase
+
+on:
+  push:
+    branches:
+      - staging
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Build
+        run: npm install && npm run build
+
+      - name: Deploy to staging
+        if: github.ref == 'refs/heads/staging'
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting:staging
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Deploy to production
+        if: github.ref == 'refs/heads/master'
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting:production
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
