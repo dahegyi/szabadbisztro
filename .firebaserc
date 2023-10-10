@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "szabadbisztro-ecd9f"
+  },
+  "targets": {
+    "szabadbisztro-ecd9f": {
+      "hosting": {
+        "staging": [
+          "1:8923446486:web:109b7ca78a543c39b59d77"
+        ],
+        "production": [
+          "1:8923446486:web:ad24cdaeb675eb80b59d77"
+        ]
+      }
+    }
   }
 }
