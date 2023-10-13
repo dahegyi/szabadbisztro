@@ -20,20 +20,18 @@ jobs:
           node-version: "16"
 
       - name: Build
-        run: npm install && npm run build
+        run: npm ci && npm run build
 
       - name: Deploy to staging
         if: github.ref == 'refs/heads/staging'
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting:staging
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SZABADBISZTRO_ECD9F }}
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_SZABADBISZTRO_ECD9F }}"
 
       - name: Deploy to production
         if: github.ref == 'refs/heads/master'
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting:production
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SZABADBISZTRO_ECD9F }}
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_SZABADBISZTRO_ECD9F }}"
