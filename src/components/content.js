@@ -142,6 +142,20 @@ const Content = (props) => {
         <div className="contact-container">
           <div id="contact" className="reservation">
             <PrismicRichText field={cms?.table_reservation_title} />
+
+            <a
+              href={`https://goo.gl/maps/${
+                restaurant === 1 ? "mKPfno5DuBWzaSmE6" : "DjyYWbFpQbpYkbVr6"
+              }
+                    `}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {restaurant === 1 ? "Király utca 101." : "Víg utca 30."}
+            </a>
+
+            <br />
+
             <a
               href={`tel:${
                 restaurant === 1 ? cms?.phone_number : cms?.ujhely_phone_number
