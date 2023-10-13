@@ -18,8 +18,8 @@ jobs:
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_SZABADBISZTRO_ECD9F }}"
-          projectId: szabadbisztro-ecd9f
-          channelID: staging
+          target: staging
+          channelID: live
 
   deploy_production:
     if: github.ref == 'refs/heads/master'
@@ -34,5 +34,5 @@ jobs:
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_SZABADBISZTRO_ECD9F }}"
-          projectId: szabadbisztro-ecd9f
-          channelID: production
+          target: production
+          channelID: live
