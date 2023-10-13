@@ -1,37 +1,30 @@
-name: Deploy to Firebase
-
-on:
+name: Deploy to Firebase Hosting
+"on":
   push:
     branches:
       - staging
       - master
-
 jobs:
-  deploy:
+  deploy_staging:
+    if: github.ref == 'refs/heads/staging'
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Install Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          node-version: "16"
-
-      - name: Build
-        run: npm ci && npm run build
-
-      - name: Deploy to staging
-        if: github.ref == 'refs/heads/staging'
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only hosting:staging
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_SZABADBISZTRO_ECD9F }}"
+          projectId: szabadbisztro-ecd9f
 
-      - name: Deploy to production
-        if: github.ref == 'refs/heads/master'
-        uses: w9jds/firebase-action@master
+  deploy_production:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          args: deploy --only hosting:production
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_SZABADBISZTRO_ECD9F }}"
+          projectId: szabadbisztro-ecd9f
