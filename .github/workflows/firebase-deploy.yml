@@ -12,11 +12,11 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
-      - run: node --version
-      - run: npm --version
-      - run: npx --version
       - uses: actions/checkout@v3
       - run: npm ci && npm run build
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "lts/*"
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
@@ -32,6 +32,9 @@ jobs:
           node-version: "16"
       - uses: actions/checkout@v3
       - run: npm ci && npm run build
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "lts/*"
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
