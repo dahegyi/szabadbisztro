@@ -1,0 +1,36 @@
+name: Deploy to Firebase Hosting
+"on":
+  push:
+    branches:
+      - staging
+      - master
+jobs:
+  deploy_staging:
+    if: github.ref == 'refs/heads/staging'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - uses: actions/checkout@v3
+      - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_SZABADBISZTRO_ECD9F }}"
+          channelID: staging
+
+  deploy_production:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - uses: actions/checkout@v3
+      - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_SZABADBISZTRO_ECD9F }}"
+          channelID: live
