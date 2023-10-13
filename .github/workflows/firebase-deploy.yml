@@ -14,14 +14,12 @@ jobs:
           node-version: "16"
       - uses: actions/checkout@v3
       - run: npm ci && npm run build
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "lts/*"
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_SZABADBISZTRO_ECD9F }}"
           projectId: szabadbisztro-ecd9f
+          channelID: staging
 
   deploy_production:
     if: github.ref == 'refs/heads/master'
@@ -32,11 +30,9 @@ jobs:
           node-version: "16"
       - uses: actions/checkout@v3
       - run: npm ci && npm run build
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "lts/*"
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_SZABADBISZTRO_ECD9F }}"
           projectId: szabadbisztro-ecd9f
+          channelID: production
