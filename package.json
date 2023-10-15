@@ -3,7 +3,7 @@
   "private": true,
   "version": "2.0.0",
   "scripts": {
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0' && stylelint 'src/**/*.{css,scss}'",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0 && stylelint 'src/**/*.{css,scss}'",
     "lint:fix": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0 --fix && stylelint 'src/**/*.{css,scss}' --fix",
     "dev": "vite",
     "build": "vite build",
