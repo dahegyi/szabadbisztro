@@ -7,7 +7,9 @@ $green-dark: #224727;
   font-family: "Urania Czech";
   font-style: normal;
   font-weight: normal;
-  src: local("Urania Czech"), url("./Urania_Czech.woff") format("woff");
+  src:
+    local("Urania Czech"),
+    url("./Urania_Czech.woff") format("woff");
 }
 
 $bg-text-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
@@ -106,7 +108,7 @@ a:hover {
 }
 
 #about {
-  background-image: url("./plant.png");
+  background-image: url("plant.png");
   background-position: bottom;
   background-size: contain;
   background-repeat: no-repeat;

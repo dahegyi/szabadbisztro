@@ -2,12 +2,10 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useSinglePrismicDocument } from "@prismicio/react";
 
-import Slideshow from "./components/slideshow";
-import Content from "./components/content";
-import MediaSlideshow from "./components/media-slideshow";
-import Footer from "./components/footer";
-
-import "./App.scss";
+import Slideshow from "./components/Slideshow.jsx";
+import Content from "./components/Content";
+import MediaSlideshow from "./components/MediaSlideshow";
+import Footer from "./components/Footer";
 
 function App() {
   const [restaurant, setRestaurant] = useState(0);

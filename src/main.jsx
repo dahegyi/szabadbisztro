@@ -1,15 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom";
-
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import store from "./store";
+import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 
 import { PrismicProvider } from "@prismicio/react";
 import { client } from "./prismic";
 
-ReactDOM.render(
+import store from "./store";
+import App from "./App";
+import "./assets/main.scss";
+
+createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <PrismicProvider client={client}>
@@ -17,7 +17,4 @@ ReactDOM.render(
       </PrismicProvider>
     </Provider>
   </React.StrictMode>,
-  document.getElementById("root")
 );
-
-reportWebVitals();
