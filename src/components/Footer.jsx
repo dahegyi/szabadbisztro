@@ -1,8 +1,15 @@
+import PropTypes from "prop-types";
+
 import { Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 
 const Footer = (props) => {
   const { cms, restaurant } = props;
+
+  Footer.propTypes = {
+    cms: PropTypes.object.isRequired,
+    restaurant: PropTypes.number.isRequired,
+  };
 
   return (
     <>

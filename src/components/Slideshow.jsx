@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -7,6 +8,10 @@ import { switchLanguage } from "../reducers/language-switcher";
 
 const Slideshow = (props) => {
   const { cms } = props;
+
+  Slideshow.propTypes = {
+    cms: PropTypes.object.isRequired,
+  };
 
   // Select and set random images as a style
   const imgs = cms?.slideshow_images;

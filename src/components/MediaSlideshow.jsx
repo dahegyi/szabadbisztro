@@ -1,9 +1,15 @@
+import PropTypes from "prop-types";
 import { PrismicRichText } from "@prismicio/react";
+
 import Container from "react-bootstrap/Container";
 import Carousel from "react-bootstrap/Carousel";
 
 const MediaSlideshow = (props) => {
   const { cms } = props;
+
+  MediaSlideshow.propTypes = {
+    cms: PropTypes.object.isRequired,
+  };
 
   return (
     <Container id="media">

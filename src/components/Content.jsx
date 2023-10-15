@@ -1,4 +1,7 @@
+import PropTypes from "prop-types";
+
 import { PrismicRichText } from "@prismicio/react";
+
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,6 +10,12 @@ import Button from "react-bootstrap/Button";
 
 const Content = (props) => {
   const { cms, restaurant, setRestaurant } = props;
+
+  Content.propTypes = {
+    cms: PropTypes.object.isRequired,
+    restaurant: PropTypes.number.isRequired,
+    setRestaurant: PropTypes.func.isRequired,
+  };
 
   return (
     <>
