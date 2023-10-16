@@ -26,7 +26,7 @@ const Content = (props) => {
       <div className="container">
         <Swiper
           loop={true}
-          autoplay={{ delay: 3000 }}
+          autoplay={{ delay: 5000, pauseOnMouseEnter: true }}
           navigation={true}
           keyboard={true}
           modules={[Autoplay, Navigation, Keyboard]}

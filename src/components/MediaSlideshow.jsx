@@ -15,7 +15,7 @@ const MediaSlideshow = (props) => {
     <div className="container media">
       <Swiper
         loop={true}
-        autoplay={{ delay: 5000 }}
+        autoplay={{ delay: 7000, pauseOnMouseEnter: true }}
         navigation={true}
         pagination={true}
         modules={[Autoplay, Navigation, Pagination]}
