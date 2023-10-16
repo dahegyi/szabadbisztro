@@ -1,5 +1,3 @@
 import * as prismic from "@prismicio/client";
 
-export const client = prismic.createClient("szabad", {
-  routes: [],
-});
+export const client = prismic.createClient("szabad", {});
