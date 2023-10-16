@@ -20,51 +20,54 @@ const Content = (props) => {
   return (
     <>
       {/*  About */}
-      <Container id="about" className="text-center my-5">
-        <PrismicRichText field={cms?.about_title} className="mb-3" />
-        <PrismicRichText field={cms?.about_content} />
+      <Container name="about" className="about text-center my-5">
+        <PrismicRichText field={cms.about_title} className="mb-3" />
+        <PrismicRichText field={cms.about_content} />
       </Container>
 
       {/* Slideshow */}
-      {cms?.banners.length > 0 ? (
-        <Container>
-          <Carousel className="mt-2">
-            {cms?.banners.map((banner, index) => (
-              <Carousel.Item key={index} className="slideshow-item">
-                <img
-                  className="d-block w-100"
-                  src={banner.banner_image.url}
-                  alt=""
-                />
-              </Carousel.Item>
-            ))}
-          </Carousel>
-        </Container>
-      ) : null}
+      <Container>
+        <Carousel className="mt-2">
+          {cms.banners.map((banner, index) => (
+            <Carousel.Item key={index} className="slideshow-item">
+              <img
+                className="d-block w-100"
+                src={banner.banner_image.url}
+                alt=""
+              />
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </Container>
 
       {/*  Menu */}
-      <Container id="menu" className="text-center mb-5">
-        <div className="text-uppercase mt-5 mb-2">
+      <Container name="menu" className="text-center mb-5">
+        <div className="text-uppercase mt-5 mb-3">
           <PrismicRichText
-            field={restaurant === 0 ? cms?.choose_restaurant : cms?.menu_title}
+            field={restaurant === 0 ? cms.choose_restaurant : cms.menu_title}
           />
         </div>
+
         {/*  Restaurant selector */}
         {restaurant === 0 ? (
           <Col>
-            <Button variant="link" onClick={() => setRestaurant(1)}>
+            <Button size="lg" className="m-3" onClick={() => setRestaurant(1)}>
               Szabad Bisztró
             </Button>
-            -
-            <Button variant="link" onClick={() => setRestaurant(2)}>
-              újHely
+            <Button size="lg" className="m-3" onClick={() => setRestaurant(2)}>
+              Új Hely
             </Button>
           </Col>
         ) : (
           <Container>
             <Row className="mb-3">
-              <Button variant="link" onClick={() => setRestaurant(0)}>
-                {cms?.back_to_choose_restaurant}
+              <Button
+                variant="link"
+                size="lg"
+                onClick={() => setRestaurant(0)}
+                className="mb-5"
+              >
+                &laquo; {cms.back_to_choose_restaurant}
               </Button>
             </Row>
             <Row className="mb-5">
@@ -72,8 +75,8 @@ const Content = (props) => {
                 <img
                   src={
                     restaurant === 1
-                      ? cms?.menu_image_left.url
-                      : cms?.ujhely_menu_image_left.url
+                      ? cms.menu_image_left.url
+                      : cms.ujhely_menu_image_left.url
                   }
                   alt=""
                   width="100%"
@@ -84,8 +87,8 @@ const Content = (props) => {
                 <img
                   src={
                     restaurant === 1
-                      ? cms?.menu_image_right.url
-                      : cms?.ujhely_menu_image_right.url
+                      ? cms.menu_image_right.url
+                      : cms.ujhely_menu_image_right.url
                   }
                   alt=""
                   width="100%"
@@ -93,40 +96,39 @@ const Content = (props) => {
                 />
               </Col>
             </Row>
-            {restaurant === 1 && cms?.menu_image_bottom?.url ? (
+            {restaurant === 1 && cms.menu_image_bottom?.url && (
               <img
-                src={cms?.menu_image_bottom.url}
+                src={cms.menu_image_bottom.url}
                 alt=""
                 width="100%"
                 className="mb-5"
                 loading="lazy"
               />
-            ) : null}
-            {restaurant === 2 && cms?.ujhely_menu_image_bottom?.url ? (
+            )}
+            {restaurant === 2 && cms.ujhely_menu_image_bottom?.url && (
               <img
-                src={cms?.ujhely_menu_image_bottom.url}
+                src={cms.ujhely_menu_image_bottom.url}
                 alt=""
                 width="100%"
                 className="mb-5"
                 loading="lazy"
               />
-            ) : null}
-            <PrismicRichText field={cms?.plant_based_disclaimer} />
+            )}
+            <PrismicRichText field={cms.plant_based_disclaimer} />
           </Container>
         )}
       </Container>
 
       {/*  Video slideshow */}
-      {cms?.videos.length > 0 ? (
+      {cms.videos.length > 0 && (
         <Container className="mt-2 mb-5">
           <Carousel variant="dark" interval={null} className="video">
-            {cms?.videos.map((video, index) => (
+            {cms.videos.map((video, index) => (
               <Carousel.Item key={index}>
                 <iframe
                   className="iframe"
                   src={`https://www.youtube-nocookie.com/embed/${video.youtube_video_id}`}
                   title="YouTube video player"
-                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
                   allowFullScreen
                 />
@@ -134,29 +136,18 @@ const Content = (props) => {
             ))}
           </Carousel>
         </Container>
-      ) : null}
-
-      {/*  Collage */}
-      {cms?.menu_image_bottom_2?.url ? (
-        <img
-          src={cms?.menu_image_bottom_2?.url}
-          alt=""
-          width="100%"
-          className="mb-5"
-        />
-      ) : null}
+      )}
 
       {/*  Table reservation */}
-      {restaurant > 0 ? (
+      {restaurant > 0 && (
         <div className="contact-container">
           <div id="contact" className="reservation">
-            <PrismicRichText field={cms?.table_reservation_title} />
+            <PrismicRichText field={cms.table_reservation_title} />
 
             <a
               href={`https://maps.app.goo.gl/${
                 restaurant === 1 ? "ZWda2yxCHYWXnHQ5A" : "DjyYWbFpQbpYkbVr6"
-              }
-                    `}
+              }`}
               target="_blank"
               rel="noreferrer"
             >
@@ -167,25 +158,27 @@ const Content = (props) => {
 
             <a
               href={`tel:${
-                restaurant === 1 ? cms?.phone_number : cms?.ujhely_phone_number
+                restaurant === 1 ? cms.phone_number : cms.ujhely_phone_number
               }`}
+              className="phone-number mt-2"
             >
-              {restaurant === 1 ? cms?.phone_number : cms?.ujhely_phone_number}
+              {restaurant === 1 ? cms.phone_number : cms.ujhely_phone_number}
             </a>
           </div>
+
           {/*  Opening hours */}
           <div className="opening-hours">
-            <PrismicRichText field={cms?.opening_hours_title} />
+            <PrismicRichText field={cms.opening_hours_title} />
             <PrismicRichText
               field={
                 restaurant === 1
-                  ? cms?.opening_hours_content
-                  : cms?.ujhely_opening_hours_content
+                  ? cms.opening_hours_content
+                  : cms.ujhely_opening_hours_content
               }
             />
           </div>
         </div>
-      ) : null}
+      )}
     </>
   );
 };

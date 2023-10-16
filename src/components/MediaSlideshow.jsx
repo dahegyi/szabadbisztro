@@ -12,9 +12,9 @@ const MediaSlideshow = (props) => {
   };
 
   return (
-    <Container id="media">
+    <Container className="media">
       <Carousel variant="dark">
-        {cms?.articles.map((article, index) => (
+        {cms.articles.map((article, index) => (
           <Carousel.Item key={index}>
             <blockquote className="blockquote text-left">
               <PrismicRichText field={article.article_title} />

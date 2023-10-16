@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useSinglePrismicDocument } from "@prismicio/react";
 
-import Slideshow from "./components/Slideshow.jsx";
+import Slideshow from "./components/Slideshow";
 import Content from "./components/Content";
 import MediaSlideshow from "./components/MediaSlideshow";
 import Footer from "./components/Footer";
@@ -29,7 +29,7 @@ function App() {
       ) : (
         data && (
           <>
-            <Slideshow cms={data} />
+            <Slideshow cms={data} restaurant={restaurant} />
             <Content
               cms={data}
               restaurant={restaurant}

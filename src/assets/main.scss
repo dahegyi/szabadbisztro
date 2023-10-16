@@ -2,6 +2,7 @@
 
 $green: #366f3f;
 $green-dark: #224727;
+$yellow: #ffff66;
 
 @font-face {
   font-family: "Urania Czech";
@@ -16,13 +17,11 @@ $bg-text-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
 $bg-text-shadow-small: 0 2px 5px #00000090;
 
 body {
-  margin: 0;
   color: #000;
   font-family: "Urania Czech", monospace;
   font-size: 1.2rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
 
   @include media-breakpoint-down(md) {
     font-size: 1rem;
@@ -39,32 +38,64 @@ a:hover {
   text-decoration: none;
 }
 
+.btn {
+  transition-duration: 0s;
+
+  &.btn-primary {
+    border: 3px dashed #000000;
+    border-radius: 0;
+    background: #ffffff;
+    color: #000000;
+
+    &:hover,
+    &:active {
+      border-color: #000000;
+      background: #eeeeee;
+      color: initial;
+    }
+  }
+
+  &.btn-link {
+    color: $green;
+
+    &:hover {
+      color: $green-dark;
+    }
+  }
+
+  &.btn-lg {
+    min-width: 160px;
+  }
+}
+
 nav {
   position: fixed;
-  font-size: 1.4rem;
-  background: #00000090;
   z-index: 99;
-  height: 0;
+  top: 50%;
+  left: 50%;
   width: 0;
-  transform: translate(50vw, 50vh);
+  height: 0;
   border-radius: 50%;
-  transition: all 0.4s ease-in-out;
-  text-transform: uppercase;
+  background: #000000aa;
+  font-size: 1.4rem;
   text-align: center;
+  text-transform: uppercase;
+  transition: all 0.4s ease-in-out;
+  user-select: none;
 
   ul {
-    height: 100vh;
-    width: 100vw;
-    transform: translate(50vmax, 50vmax);
     display: flex;
+    width: 100vw;
+    height: 100vh;
     flex-direction: column;
     justify-content: center;
     padding: 0;
+    transform: translate(50%, calc(50% + 30px));
 
     @keyframes fadeIn {
       0% {
         opacity: 0;
-        transform: translateY(-50px);
+        transform: translateY(-60px);
       }
       100% {
         opacity: 1;
@@ -75,12 +106,12 @@ nav {
     li {
       display: none;
       min-width: 160px;
-      color: #fff;
-      float: none;
-      text-shadow: $bg-text-shadow;
-      opacity: 0;
-      animation: fadeIn 0.3s forwards;
       margin: 12px 0;
+      animation: fadeIn 0.3s forwards;
+      color: #ffffff;
+      float: none;
+      opacity: 0;
+      text-shadow: $bg-text-shadow;
 
       $delayIncrement: 0.3s;
 
@@ -101,45 +132,50 @@ nav {
 
   @include media-breakpoint-down(lg) {
     &.open {
-      backdrop-filter: blur(8px);
-
+      top: -50%;
+      right: -50%;
+      bottom: -50%;
+      left: -50%;
       width: 200vmax;
       height: 200vmax;
-      transform: translate(-50vmax, -50vmax);
+      backdrop-filter: blur(8px);
       opacity: 1;
 
       li {
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
       }
     }
   }
 
   @include media-breakpoint-up(lg) {
     position: absolute;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: 0;
     display: block;
     width: 100%;
     height: auto;
-    transform: none;
-    transition: none;
     margin: 12px auto;
     background: none;
+    transition: none;
 
     ul {
       height: auto;
-      transform: none;
       flex-direction: row;
+      transform: none;
 
       li {
-        opacity: 1;
-        animation: none;
         display: inline-block;
         width: 100%;
+        animation: none;
         background: none;
+        opacity: 1;
 
         a:not([href]):not([class]):hover {
-          color: #ff6;
+          color: $yellow;
         }
 
         img {
@@ -152,33 +188,33 @@ nav {
 
 .hamburger {
   position: fixed;
-  left: calc(100vw - 73px);
-  margin: 1rem;
-  background: #fff;
-  border-radius: 50%;
   z-index: 100;
-  transition: transform 0.3s ease-in-out;
+  left: calc(100vw - 73px);
   width: 41px;
   height: 41px;
+  border-radius: 50%;
+  margin: 1rem;
+  background: #ffffff;
   box-shadow: 0 2px 10px #00000030;
   cursor: pointer;
+  transition: transform 0.3s ease-in-out;
 
   @include media-breakpoint-up(lg) {
     display: none;
   }
 
   span {
-    width: 21px;
-    height: 2px;
     position: absolute;
-    background: #000;
-    right: 0;
-    margin: auto;
-    left: 0;
-    transition: all 0.3s ease-in-out;
-    width: 21;
-    border-radius: 1px;
     top: calc(50% - ((4px)) + -1px);
+    right: 0;
+    left: 0;
+    width: 21px;
+    width: 21;
+    height: 2px;
+    border-radius: 1px;
+    margin: auto;
+    background: #000000;
+    transition: all 0.3s ease-in-out;
 
     &:nth-of-type(1) {
       top: calc(50% - ((4px)) + -3px);
@@ -205,9 +241,9 @@ nav {
 
     span {
       &:nth-of-type(1) {
-        transform: rotate(45deg);
-        width: 21px !important;
         top: calc(50% - (1px)) !important;
+        width: 21px !important;
+        transform: rotate(45deg);
       }
 
       &:nth-of-type(2) {
@@ -216,22 +252,22 @@ nav {
       }
 
       &:nth-of-type(3) {
-        transform: rotate(-45deg);
-        width: 21px !important;
         top: calc(50% - (1px)) !important;
+        width: 21px !important;
+        transform: rotate(-45deg);
       }
     }
   }
 }
 
 .banner {
-  min-height: 300px;
   width: 100%;
+  min-height: 300px;
   padding: 0;
   background-position: center;
   background-size: cover;
-  box-shadow: inset 0 0 0 5000px rgba(0, 0, 0, 0.6);
-  color: #fff;
+  box-shadow: inset 0 0 0 100vmax rgba(0, 0, 0, 0.5);
+  color: #ffffff;
 
   h1 {
     position: absolute;
@@ -245,7 +281,7 @@ nav {
   }
 }
 
-#media {
+.media {
   .carousel-inner {
     display: flex;
     min-height: 400px;
@@ -259,7 +295,7 @@ nav {
   }
 }
 
-#about {
+.about {
   background-image: url("plant.png");
   background-position: bottom;
   background-repeat: no-repeat;
@@ -281,13 +317,14 @@ nav {
 
 .slideshow-item img {
   width: 100%;
-  max-height: 90vh;
+  height: 85vh;
+  max-height: 650px;
   object-fit: cover;
 }
 
 .contact-container {
   padding: 0;
-  color: #fff;
+  color: #ffffff;
   text-align: center;
   text-shadow: $bg-text-shadow-small;
 
@@ -300,7 +337,7 @@ nav {
     background: $green;
     font-size: 1.6rem;
 
-    a {
+    .phone-number {
       text-decoration: underline;
     }
 
@@ -327,11 +364,11 @@ nav {
   .iframe {
     display: flex;
     width: 75%;
-    height: calc(100vw / 4);
+    height: 25vmax;
     margin: 0 auto;
 
     @include media-breakpoint-down(md) {
-      height: calc(100vw / 2);
+      height: 50vmax;
     }
   }
 
@@ -340,19 +377,32 @@ nav {
   }
 
   &-dark {
-    a {
-      background-color: white;
-      opacity: 1 !important;
+    .carousel-inner {
+      padding: 0;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      display: none;
+    }
+
+    @include media-breakpoint-up(md) {
+      .carousel-inner {
+        padding: 2rem 13rem;
+      }
+
+      .carousel-control-prev,
+      .carousel-control-next {
+        display: flex;
+      }
     }
   }
 
-  &-dark {
-    .carousel-inner {
-      padding: 2rem;
-    }
+  .blockquote {
+    font-size: 1rem;
 
-    &:not(.video) .carousel-inner {
-      padding: 2rem 13rem;
+    @include media-breakpoint-up(md) {
+      font-size: 1.3rem;
     }
   }
 }
@@ -361,6 +411,7 @@ nav {
   width: 100%;
   color: #ddd;
   text-align: center;
+  user-select: none;
 
   .icon {
     display: inline-block;
@@ -400,4 +451,14 @@ nav {
   top: 30vh;
   left: 40vw;
   width: 20vw;
+}
+
+::-moz-selection {
+  background-color: $green-dark;
+  color: white;
+}
+
+::selection {
+  background-color: $green-dark;
+  color: white;
 }

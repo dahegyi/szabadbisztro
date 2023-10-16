@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import { Link } from "react-scroll";
@@ -7,43 +7,51 @@ import { Link } from "react-scroll";
 import { switchLanguage } from "../reducers/language-switcher";
 
 const Slideshow = (props) => {
-  const { cms } = props;
+  const { cms, restaurant } = props;
 
   Slideshow.propTypes = {
     cms: PropTypes.object.isRequired,
+    restaurant: PropTypes.number.isRequired,
   };
 
-  // Select and set random images as a style
-  const imgs = cms.slideshow_images;
-  const slideshowImage =
-    imgs && imgs[Math.floor(Math.random() * imgs.length)].slideshow_image;
-  const slideshowStyles = {
-    backgroundImage: `url(${slideshowImage?.url})`,
-    height: 0.8 * window.innerHeight,
-  };
+  const [slideshowStyles, setSlideshowStyles] = useState({});
+  const [slideshowTexts, setSlideshowTexts] = useState([]);
 
-  // Select random texts
-  const texts = cms.slideshow_texts;
-  const textsLength = texts?.length;
+  useEffect(() => {
+    // Select and set random images as a style
+    const imgs = cms.slideshow_images;
+    const slideshowImage =
+      imgs && imgs[Math.floor(Math.random() * imgs.length)].slideshow_image;
 
-  let rand1 = Math.floor(Math.random() * textsLength);
-  let rand2 = rand1;
+    setSlideshowStyles({
+      backgroundImage: `url(${slideshowImage?.url})`,
+      height: 0.8 * window.innerHeight,
+    });
 
-  while (rand1 === rand2) {
-    rand2 = Math.floor(Math.random() * textsLength);
-  }
+    // Select random texts
+    const texts = cms.slideshow_texts;
+    const textsLength = texts?.length;
 
-  const slideshowTexts = [
-    texts && texts[rand1].text,
-    texts && texts[rand2].text,
-  ];
+    let rand1 = Math.floor(Math.random() * textsLength);
+    let rand2 = rand1;
+
+    while (rand1 === rand2) {
+      rand2 = Math.floor(Math.random() * textsLength);
+    }
+
+    setSlideshowTexts([texts && texts[rand1].text, texts && texts[rand2].text]);
+  }, [cms]);
 
   const dispatch = useDispatch();
 
   const navbar = useRef(null);
+  const [isTogglerChecked, setIsTogglerChecked] = useState(false);
 
   const toggleNavigation = () => {
+    document.querySelector("body").classList.toggle("overflow-hidden");
     navbar.current.classList.toggle("open");
+
+    setIsTogglerChecked(!isTogglerChecked);
   };
 
   return (
@@ -54,12 +62,24 @@ const Slideshow = (props) => {
       <nav ref={navbar}>
         <ul>
           <li>
-            <Link to="about" smooth={true} offset={-50} duration={500}>
+            <Link
+              to="about"
+              smooth={true}
+              offset={-50}
+              duration={150}
+              onClick={toggleNavigation}
+            >
               {cms.about}
             </Link>
           </li>
           <li>
-            <Link to="menu" smooth={true} offset={-50} duration={500}>
+            <Link
+              to="menu"
+              smooth={true}
+              offset={-50}
+              duration={150}
+              onClick={toggleNavigation}
+            >
               {cms.menu}
             </Link>
           </li>
@@ -69,19 +89,28 @@ const Slideshow = (props) => {
             </a>
           </li>
           <li>
-            <Link to="contact" smooth={true} offset={-50} duration={500}>
+            <Link
+              to={restaurant ? "contact" : "menu"}
+              smooth={true}
+              offset={restaurant ? 0 : -50}
+              duration={150}
+              onClick={toggleNavigation}
+            >
               {cms.contact}
             </Link>
           </li>
           <li>
-            <a href="#" onClick={() => dispatch(switchLanguage())}>
-              {cms.change_lang}
-            </a>
+            <a onClick={() => dispatch(switchLanguage())}>{cms.change_lang}</a>
           </li>
         </ul>
       </nav>
 
-      <input id="navbar-toggler" type="checkbox" onChange={toggleNavigation} />
+      <input
+        id="navbar-toggler"
+        type="checkbox"
+        onChange={toggleNavigation}
+        checked={isTogglerChecked}
+      />
       <label htmlFor="navbar-toggler" className="position-absolute">
         <div className="hamburger">
           <span />
