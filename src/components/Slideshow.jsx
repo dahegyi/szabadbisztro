@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux";
+import { useRef } from "react";
 import PropTypes from "prop-types";
 
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import Container from "react-bootstrap/Container";
+import { Link } from "react-scroll";
+
 import { switchLanguage } from "../reducers/language-switcher";
 
 const Slideshow = (props) => {
@@ -14,7 +14,7 @@ const Slideshow = (props) => {
   };
 
   // Select and set random images as a style
-  const imgs = cms?.slideshow_images;
+  const imgs = cms.slideshow_images;
   const slideshowImage =
     imgs && imgs[Math.floor(Math.random() * imgs.length)].slideshow_image;
   const slideshowStyles = {
@@ -23,7 +23,7 @@ const Slideshow = (props) => {
   };
 
   // Select random texts
-  const texts = cms?.slideshow_texts;
+  const texts = cms.slideshow_texts;
   const textsLength = texts?.length;
 
   let rand1 = Math.floor(Math.random() * textsLength);
@@ -40,36 +40,63 @@ const Slideshow = (props) => {
 
   const dispatch = useDispatch();
 
+  const navbar = useRef(null);
+
+  const toggleNavigation = () => {
+    navbar.current.classList.toggle("open");
+  };
+
   return (
     <>
-      <Navbar
-        expand="lg"
-        variant="dark"
-        className="w-100 position-absolute text-uppercase"
-      >
-        <Navbar.Toggle aria-controls="navbar-nav" className="ms-auto me-2" />
-        <Navbar.Collapse id="navbar-nav">
-          <Nav>
-            <Nav.Link href="#about">{cms?.about}</Nav.Link>
-            <Nav.Link href="#menu">{cms?.menu}</Nav.Link>
-            <Nav.Link href="/">
-              <img src="./logo-light.png" alt="Szabad Bisztró" height="64" />
-            </Nav.Link>
-            <Nav.Link href="#contact">{cms?.contact}</Nav.Link>
-            <Nav.Link onClick={() => dispatch(switchLanguage())}>
-              {cms?.change_lang}
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+      <div className="d-lg-none position-absolute w-100 mt-3 text-center">
+        <img src="./logo.png" alt="Szabad Bisztró" height="48" />
+      </div>
+      <nav ref={navbar}>
+        <ul>
+          <li>
+            <Link to="about" smooth={true} offset={-50} duration={500}>
+              {cms.about}
+            </Link>
+          </li>
+          <li>
+            <Link to="menu" smooth={true} offset={-50} duration={500}>
+              {cms.menu}
+            </Link>
+          </li>
+          <li className="d-none d-lg-inline-block">
+            <a href="/">
+              <img src="./logo.png" alt="Szabad Bisztró" height="56" />
+            </a>
+          </li>
+          <li>
+            <Link to="contact" smooth={true} offset={-50} duration={500}>
+              {cms.contact}
+            </Link>
+          </li>
+          <li>
+            <a href="#" onClick={() => dispatch(switchLanguage())}>
+              {cms.change_lang}
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-      <Container className="banner" style={slideshowStyles}>
-        <h1 style={{ top: 0.35 * window.innerHeight }}>
+      <input id="navbar-toggler" type="checkbox" onChange={toggleNavigation} />
+      <label htmlFor="navbar-toggler" className="position-absolute">
+        <div className="hamburger">
+          <span />
+          <span />
+          <span />
+        </div>
+      </label>
+
+      <div className="container-fluid banner" style={slideshowStyles}>
+        <h1 style={{ top: Math.max(0.35 * window.innerHeight, 130) }}>
           {slideshowTexts[0]}
           <br />
           {slideshowTexts[1]}
         </h1>
-      </Container>
+      </div>
     </>
   );
 };
