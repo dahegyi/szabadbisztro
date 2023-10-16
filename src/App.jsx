@@ -27,20 +27,22 @@ function App() {
       {state === "loading" ? (
         <img src="./lec.gif" className="loading" alt="nyugi..." />
       ) : (
-        <>
-          <Slideshow cms={data} />
-          <Content
-            cms={data}
-            restaurant={restaurant}
-            setRestaurant={setRestaurant}
-          />
-          <MediaSlideshow cms={data} />
-          <Footer
-            cms={data}
-            restaurant={restaurant}
-            setRestaurant={setRestaurant}
-          />
-        </>
+        data && (
+          <>
+            <Slideshow cms={data} />
+            <Content
+              cms={data}
+              restaurant={restaurant}
+              setRestaurant={setRestaurant}
+            />
+            <MediaSlideshow cms={data} />
+            <Footer
+              cms={data}
+              restaurant={restaurant}
+              setRestaurant={setRestaurant}
+            />
+          </>
+        )
       )}
     </>
   );
