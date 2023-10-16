@@ -2,11 +2,8 @@ import PropTypes from "prop-types";
 
 import { PrismicRichText } from "@prismicio/react";
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Carousel from "react-bootstrap/Carousel";
-import Button from "react-bootstrap/Button";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Keyboard } from "swiper/modules";
 
 const Content = (props) => {
   const { cms, restaurant, setRestaurant } = props;
@@ -20,28 +17,35 @@ const Content = (props) => {
   return (
     <>
       {/*  About */}
-      <Container name="about" className="about text-center my-5">
+      <div name="about" className="container about text-center my-5">
         <PrismicRichText field={cms.about_title} className="mb-3" />
         <PrismicRichText field={cms.about_content} />
-      </Container>
+      </div>
 
       {/* Slideshow */}
-      <Container>
-        <Carousel className="mt-2">
+      <div className="container">
+        <Swiper
+          loop={true}
+          autoplay={{ delay: 3000 }}
+          navigation={true}
+          keyboard={true}
+          modules={[Autoplay, Navigation, Keyboard]}
+          className="image-slideshow"
+        >
           {cms.banners.map((banner, index) => (
-            <Carousel.Item key={index} className="slideshow-item">
+            <SwiperSlide key={index}>
               <img
                 className="d-block w-100"
                 src={banner.banner_image.url}
                 alt=""
               />
-            </Carousel.Item>
+            </SwiperSlide>
           ))}
-        </Carousel>
-      </Container>
+        </Swiper>
+      </div>
 
       {/*  Menu */}
-      <Container name="menu" className="text-center mb-5">
+      <div name="menu" className="container text-center mb-5">
         <div className="text-uppercase mt-5 mb-3">
           <PrismicRichText
             field={restaurant === 0 ? cms.choose_restaurant : cms.menu_title}
@@ -50,28 +54,33 @@ const Content = (props) => {
 
         {/*  Restaurant selector */}
         {restaurant === 0 ? (
-          <Col>
-            <Button size="lg" className="m-3" onClick={() => setRestaurant(1)}>
+          <div className="col">
+            <button
+              className="btn btn-primary btn-lg m-3"
+              onClick={() => setRestaurant(1)}
+            >
               Szabad Bisztró
-            </Button>
-            <Button size="lg" className="m-3" onClick={() => setRestaurant(2)}>
+            </button>
+            <button
+              size="lg"
+              className="btn btn-primary btn-lg m-3"
+              onClick={() => setRestaurant(2)}
+            >
               Új Hely
-            </Button>
-          </Col>
+            </button>
+          </div>
         ) : (
-          <Container>
-            <Row className="mb-3">
-              <Button
-                variant="link"
-                size="lg"
+          <div className="container">
+            <div className="row mb-3">
+              <button
+                className="btn btn-link btn-lg mb-5"
                 onClick={() => setRestaurant(0)}
-                className="mb-5"
               >
                 &laquo; {cms.back_to_choose_restaurant}
-              </Button>
-            </Row>
-            <Row className="mb-5">
-              <Col sm="12" md="6">
+              </button>
+            </div>
+            <div className="row mb-5">
+              <div className="col-12 col-md-6">
                 <img
                   src={
                     restaurant === 1
@@ -82,8 +91,8 @@ const Content = (props) => {
                   width="100%"
                   loading="lazy"
                 />
-              </Col>
-              <Col sm="12" md="6">
+              </div>
+              <div className="col-12 col-md-6">
                 <img
                   src={
                     restaurant === 1
@@ -94,8 +103,8 @@ const Content = (props) => {
                   width="100%"
                   loading="lazy"
                 />
-              </Col>
-            </Row>
+              </div>
+            </div>
             {restaurant === 1 && cms.menu_image_bottom?.url && (
               <img
                 src={cms.menu_image_bottom.url}
@@ -115,16 +124,16 @@ const Content = (props) => {
               />
             )}
             <PrismicRichText field={cms.plant_based_disclaimer} />
-          </Container>
+          </div>
         )}
-      </Container>
+      </div>
 
       {/*  Video slideshow */}
       {cms.videos.length > 0 && (
-        <Container className="mt-2 mb-5">
-          <Carousel variant="dark" interval={null} className="video">
+        <div className="container mb-3">
+          <Swiper loop={true} navigation={true} modules={[Navigation]}>
             {cms.videos.map((video, index) => (
-              <Carousel.Item key={index}>
+              <SwiperSlide key={index}>
                 <iframe
                   className="iframe"
                   src={`https://www.youtube-nocookie.com/embed/${video.youtube_video_id}`}
@@ -132,10 +141,10 @@ const Content = (props) => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
                   allowFullScreen
                 />
-              </Carousel.Item>
+              </SwiperSlide>
             ))}
-          </Carousel>
-        </Container>
+          </Swiper>
+        </div>
       )}
 
       {/*  Table reservation */}

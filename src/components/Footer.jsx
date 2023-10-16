@@ -10,7 +10,7 @@ const Footer = (props) => {
 
   return (
     <>
-      <div className="container-fluid footer footer-light">
+      <div className="container-fluid footer footer-light mt-3">
         <a
           href="https://facebook.com/Szabad.vegan.bistro"
           target="_blank"

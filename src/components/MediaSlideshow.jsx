@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { PrismicRichText } from "@prismicio/react";
 
-import Container from "react-bootstrap/Container";
-import Carousel from "react-bootstrap/Carousel";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 const MediaSlideshow = (props) => {
   const { cms } = props;
@@ -12,18 +12,24 @@ const MediaSlideshow = (props) => {
   };
 
   return (
-    <Container className="media">
-      <Carousel variant="dark">
+    <div className="container media">
+      <Swiper
+        loop={true}
+        autoplay={{ delay: 5000 }}
+        navigation={true}
+        pagination={true}
+        modules={[Autoplay, Navigation, Pagination]}
+      >
         {cms.articles.map((article, index) => (
-          <Carousel.Item key={index}>
+          <SwiperSlide key={index}>
             <blockquote className="blockquote text-left">
               <PrismicRichText field={article.article_title} />
               <PrismicRichText field={article.article_content} />
             </blockquote>
-          </Carousel.Item>
+          </SwiperSlide>
         ))}
-      </Carousel>
-    </Container>
+      </Swiper>
+    </div>
   );
 };
 
