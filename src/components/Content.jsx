@@ -153,8 +153,8 @@ const Content = (props) => {
             <PrismicRichText field={cms?.table_reservation_title} />
 
             <a
-              href={`https://goo.gl/maps/${
-                restaurant === 1 ? "mKPfno5DuBWzaSmE6" : "DjyYWbFpQbpYkbVr6"
+              href={`https://maps.app.goo.gl/${
+                restaurant === 1 ? "ZWda2yxCHYWXnHQ5A" : "DjyYWbFpQbpYkbVr6"
               }
                     `}
               target="_blank"
