@@ -117,7 +117,7 @@ nav {
   font-size: 1.4rem;
   text-align: center;
   text-transform: uppercase;
-  transition: all 10s ease-in-out;
+  transition: all 0.3s ease-in-out;
   user-select: none;
 
   ul {
@@ -138,7 +138,6 @@ nav {
 
     li {
       display: none;
-      min-width: 160px;
       margin: 12px 0;
       animation: fadeIn 0.3s forwards;
       color: #ffffff;
@@ -164,17 +163,19 @@ nav {
 
   @include media-breakpoint-down(md) {
     &.open {
-      // top: -50%;
-      // left: -50%;
-      width: max(100vw, 100vh);
-      height: max(100vw, 100vh);
+      top: calc(-0.5 * max(100vw, 100vh));
+      left: calc(-0.5 * max(100vw, 100vh));
+      width: max(200vw, 200vh);
+      height: max(200vw, 200vh);
       backdrop-filter: blur(8px);
 
       ul {
+        position: relative;
+        top: 25%;
+        left: 25%;
         width: 100vw;
         height: 100vh;
         flex-direction: column;
-        transform: translate(50vw, 45vh);
 
         li {
           display: flex;
@@ -223,11 +224,11 @@ nav {
 .hamburger {
   position: fixed;
   z-index: 100;
-  right: 0;
+  left: calc(100vw - 84px);
   width: 41px;
   height: 41px;
   border-radius: 50%;
-  margin: 1.4rem;
+  margin: 1.3rem;
   background: #ffffff;
   box-shadow: $box-shadow-bottom;
   cursor: pointer;
