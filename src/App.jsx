@@ -5,10 +5,6 @@ import { useSinglePrismicDocument } from "@prismicio/react";
 import SwiperCore from "swiper";
 import { Autoplay } from "swiper/modules";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
 import Slideshow from "./components/Slideshow";
 import Content from "./components/Content";
 import MediaSlideshow from "./components/MediaSlideshow";
