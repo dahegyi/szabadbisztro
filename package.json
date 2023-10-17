@@ -6,7 +6,8 @@
     "lint:fix": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0 --fix && stylelint 'src/**/*.{css,scss}' --fix",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@prismicio/client": "^7.3.0",
