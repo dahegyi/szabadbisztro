@@ -6,30 +6,30 @@ import { Link } from "react-scroll";
 
 import { switchLanguage } from "../reducers/language-switcher";
 
-const Slideshow = (props) => {
+const Header = (props) => {
   const { cms, restaurant } = props;
 
-  Slideshow.propTypes = {
+  Header.propTypes = {
     cms: PropTypes.object.isRequired,
     restaurant: PropTypes.number.isRequired,
   };
 
-  const [slideshowStyles, setSlideshowStyles] = useState({});
-  const [slideshowTexts, setSlideshowTexts] = useState([]);
+  const [headerStyles, setheaderStyles] = useState({});
+  const [headerTexts, setheaderTexts] = useState([]);
 
   useEffect(() => {
     // Select and set random images as a style
-    const imgs = cms.slideshow_images;
-    const slideshowImage =
-      imgs && imgs[Math.floor(Math.random() * imgs.length)].slideshow_image;
+    const imgs = cms.header_images;
+    const headerImage =
+      imgs && imgs[Math.floor(Math.random() * imgs.length)].header_image;
 
-    setSlideshowStyles({
-      backgroundImage: `url(${slideshowImage?.url})`,
+    setheaderStyles({
+      backgroundImage: `url(${headerImage?.url})`,
       height: 0.8 * window.innerHeight,
     });
 
     // Select random texts
-    const texts = cms.slideshow_texts;
+    const texts = cms.header_texts;
     const textsLength = texts?.length;
 
     let rand1 = Math.floor(Math.random() * textsLength);
@@ -39,7 +39,7 @@ const Slideshow = (props) => {
       rand2 = Math.floor(Math.random() * textsLength);
     }
 
-    setSlideshowTexts([texts && texts[rand1].text, texts && texts[rand2].text]);
+    setheaderTexts([texts && texts[rand1].text, texts && texts[rand2].text]);
   }, [cms]);
 
   const navbar = useRef(null);
@@ -59,11 +59,11 @@ const Slideshow = (props) => {
     dispatch(switchLanguage());
   };
 
-  const [slideshowTextStyle, setSlideshowTextStyle] = useState();
+  const [headerTextStyle, setheaderTextStyle] = useState();
 
   // this is because some mobile browsers change viewport height when scrolling and we want this text to not move
   useEffect(() => {
-    setSlideshowTextStyle({
+    setheaderTextStyle({
       top: Math.max(0.35 * window.innerHeight, 130),
     });
   }, []);
@@ -133,15 +133,15 @@ const Slideshow = (props) => {
         </div>
       </label>
 
-      <div className="container-fluid banner" style={slideshowStyles}>
-        <h1 style={slideshowTextStyle}>
-          {slideshowTexts[0]}
+      <div className="container-fluid banner" style={headerStyles}>
+        <h1 style={headerTextStyle}>
+          {headerTexts[0]}
           <br />
-          {slideshowTexts[1]}
+          {headerTexts[1]}
         </h1>
       </div>
     </>
   );
 };
 
-export default Slideshow;
+export default Header;

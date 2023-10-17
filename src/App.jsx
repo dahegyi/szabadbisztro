@@ -5,7 +5,7 @@ import { useSinglePrismicDocument } from "@prismicio/react";
 import SwiperCore from "swiper";
 import { Autoplay } from "swiper/modules";
 
-import Slideshow from "./components/Slideshow";
+import Header from "./components/Header";
 import Content from "./components/Content";
 import MediaSlideshow from "./components/MediaSlideshow";
 import Footer from "./components/Footer";
@@ -36,7 +36,7 @@ function App() {
       ) : (
         data && (
           <>
-            <Slideshow cms={data} restaurant={restaurant} />
+            <Header cms={data} restaurant={restaurant} />
             <Content
               cms={data}
               restaurant={restaurant}
