@@ -14,22 +14,22 @@ const Header = (props) => {
     restaurant: PropTypes.number.isRequired,
   };
 
-  const [headerStyles, setheaderStyles] = useState({});
-  const [headerTexts, setheaderTexts] = useState([]);
+  const [headerStyles, setHeaderStyles] = useState({});
+  const [headerTexts, setHeaderTexts] = useState([]);
 
   useEffect(() => {
     // Select and set random images as a style
-    const imgs = cms.header_images;
+    const imgs = cms.slideshow_images;
     const headerImage =
-      imgs && imgs[Math.floor(Math.random() * imgs.length)].header_image;
+      imgs && imgs[Math.floor(Math.random() * imgs.length)].slideshow_image;
 
-    setheaderStyles({
+    setHeaderStyles({
       backgroundImage: `url(${headerImage?.url})`,
       height: 0.8 * window.innerHeight,
     });
 
     // Select random texts
-    const texts = cms.header_texts;
+    const texts = cms.slideshow_texts;
     const textsLength = texts?.length;
 
     let rand1 = Math.floor(Math.random() * textsLength);
@@ -39,7 +39,7 @@ const Header = (props) => {
       rand2 = Math.floor(Math.random() * textsLength);
     }
 
-    setheaderTexts([texts && texts[rand1].text, texts && texts[rand2].text]);
+    setHeaderTexts([texts && texts[rand1].text, texts && texts[rand2].text]);
   }, [cms]);
 
   const navbar = useRef(null);
@@ -59,11 +59,11 @@ const Header = (props) => {
     dispatch(switchLanguage());
   };
 
-  const [headerTextStyle, setheaderTextStyle] = useState();
+  const [headerTextStyle, setHeaderTextStyle] = useState();
 
   // this is because some mobile browsers change viewport height when scrolling and we want this text to not move
   useEffect(() => {
-    setheaderTextStyle({
+    setHeaderTextStyle({
       top: Math.max(0.35 * window.innerHeight, 130),
     });
   }, []);
