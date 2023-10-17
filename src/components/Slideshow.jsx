@@ -54,9 +54,18 @@ const Slideshow = (props) => {
     setIsTogglerChecked(!isTogglerChecked);
   };
 
+  const [slideshowTextStyle, setSlideshowTextStyle] = useState();
+
+  // this is because some mobile browsers change viewport height when scrolling and we want this text to not move
+  useEffect(() => {
+    setSlideshowTextStyle({
+      top: Math.max(0.35 * window.innerHeight, 130),
+    });
+  }, []);
+
   return (
     <>
-      <div className="d-lg-none position-absolute w-100 mt-4 text-center">
+      <div className="d-md-none position-absolute w-100 mt-4 text-center">
         <img src="./logo.webp" alt="Szabad Bisztró" height="48" />
       </div>
       <nav ref={navbar}>
@@ -83,7 +92,7 @@ const Slideshow = (props) => {
               {cms.menu}
             </Link>
           </li>
-          <li className="d-none d-lg-inline-block">
+          <li className="d-none d-md-inline-block">
             <a href="/">
               <img src="./logo.webp" alt="Szabad Bisztró" height="56" />
             </a>
@@ -120,7 +129,7 @@ const Slideshow = (props) => {
       </label>
 
       <div className="container-fluid banner" style={slideshowStyles}>
-        <h1 style={{ top: Math.max(0.35 * window.innerHeight, 130) }}>
+        <h1 style={slideshowTextStyle}>
           {slideshowTexts[0]}
           <br />
           {slideshowTexts[1]}

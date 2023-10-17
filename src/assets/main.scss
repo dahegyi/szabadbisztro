@@ -42,6 +42,12 @@ body {
   @include media-breakpoint-down(md) {
     font-size: 1rem;
   }
+
+  @include media-breakpoint-up(md) {
+    &.overflow-hidden {
+      overflow: visible !important;
+    }
+  }
 }
 
 a {
@@ -96,17 +102,13 @@ nav {
   font-size: 1.4rem;
   text-align: center;
   text-transform: uppercase;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.3s ease-in-out;
   user-select: none;
 
   ul {
     display: flex;
-    width: 100vw;
-    height: 100vh;
-    flex-direction: column;
     justify-content: center;
     padding: 0;
-    transform: translate(50%, 50%);
 
     @keyframes fadeIn {
       0% {
@@ -125,7 +127,6 @@ nav {
       margin: 12px 0;
       animation: fadeIn 0.3s forwards;
       color: #ffffff;
-      float: none;
       opacity: 0;
       text-shadow: $bg-text-shadow;
 
@@ -134,19 +135,19 @@ nav {
       @for $i from 1 through 5 {
         @if $i < 3 {
           &:nth-child(#{$i}) {
-            animation-delay: 0.2s + $delayIncrement * $i;
+            animation-delay: $delayIncrement * $i;
           }
         } @else if $i > 3 {
           // skip the 5th child since it's not visible
           &:nth-child(#{$i}) {
-            animation-delay: 0.2s + $delayIncrement * ($i - 1);
+            animation-delay: $delayIncrement * ($i - 1);
           }
         }
       }
     }
   }
 
-  @include media-breakpoint-down(lg) {
+  @include media-breakpoint-down(md) {
     &.open {
       top: -50%;
       right: -50%;
@@ -155,17 +156,23 @@ nav {
       width: 200vmax;
       height: 200vmax;
       backdrop-filter: blur(8px);
-      opacity: 1;
 
-      li {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      ul {
+        width: 100vw;
+        height: 100vh;
+        flex-direction: column;
+        transform: translate(50vw, 45vh);
+
+        li {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
       }
     }
   }
 
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-up(md) {
     position: absolute;
     top: 0;
     right: 0;
@@ -179,13 +186,11 @@ nav {
     transition: none;
 
     ul {
-      height: auto;
-      flex-direction: row;
-      transform: none;
-
       li {
-        display: inline-block;
+        display: flex;
         width: 100%;
+        align-items: center;
+        justify-content: center;
         animation: none;
         background: none;
         opacity: 1;
@@ -205,23 +210,23 @@ nav {
 .hamburger {
   position: fixed;
   z-index: 100;
-  left: calc(100vw - 73px);
+  right: 0;
   width: 41px;
   height: 41px;
   border-radius: 50%;
-  margin: 1rem;
+  margin: 1.5rem;
   background: #ffffff;
   box-shadow: 0 2px 10px #00000030;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
 
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-up(md) {
     display: none;
   }
 
   span {
     position: absolute;
-    top: calc(50% - ((4px)) + -1px);
+    top: calc(50% - 3px);
     right: 0;
     left: 0;
     width: 21px;
@@ -233,17 +238,17 @@ nav {
     transition: all 0.3s ease-in-out;
 
     &:nth-of-type(1) {
-      top: calc(50% - ((4px)) + -3px);
+      top: calc(50% - 7px);
       width: 21px;
     }
 
     &:nth-of-type(2) {
-      top: calc(50% - ((4px)) + 3px);
+      top: calc(50% - 1px);
       width: 21px;
     }
 
     &:nth-of-type(3) {
-      top: calc(50% - ((4px)) + 9px);
+      top: calc(50% + 5px);
       width: 21px;
     }
   }
@@ -278,7 +283,7 @@ nav {
 
 .banner {
   width: 100%;
-  min-height: 300px;
+  height: 300px;
   padding: 0;
   background-position: center;
   background-size: cover;
@@ -287,6 +292,7 @@ nav {
 
   h1 {
     position: absolute;
+    top: max(35%, 130px);
     width: 100%;
     text-align: center;
     text-shadow: $bg-text-shadow;
@@ -390,9 +396,9 @@ nav {
   &.image-slideshow {
     --swiper-theme-color: #ffffff;
     --swiper-pagination-bullet-inactive-color: #ffffff;
+    height: 85vmin;
 
     min-height: 300px;
-    height: 85vmin;
     max-height: 650px;
     border-radius: 15px;
 
@@ -413,8 +419,8 @@ nav {
 
     iframe {
       width: 100%;
-      min-height: 270px;
       height: 100%;
+      min-height: 270px;
       max-height: 650px;
 
       @include media-breakpoint-up(md) {
