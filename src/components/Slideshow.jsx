@@ -56,8 +56,8 @@ const Slideshow = (props) => {
 
   return (
     <>
-      <div className="d-lg-none position-absolute w-100 mt-3 text-center">
-        <img src="./logo.png" alt="Szabad Bisztró" height="48" />
+      <div className="d-lg-none position-absolute w-100 mt-4 text-center">
+        <img src="./logo.webp" alt="Szabad Bisztró" height="48" />
       </div>
       <nav ref={navbar}>
         <ul>
@@ -85,7 +85,7 @@ const Slideshow = (props) => {
           </li>
           <li className="d-none d-lg-inline-block">
             <a href="/">
-              <img src="./logo.png" alt="Szabad Bisztró" height="56" />
+              <img src="./logo.webp" alt="Szabad Bisztró" height="56" />
             </a>
           </li>
           <li>
