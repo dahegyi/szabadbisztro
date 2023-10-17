@@ -10,7 +10,7 @@ const Footer = (props) => {
 
   return (
     <>
-      <div className="container-fluid footer footer-light mt-3">
+      <div className="footer top mt-3 py-4">
         <a
           href="https://facebook.com/Szabad.vegan.bistro"
           target="_blank"
@@ -33,8 +33,8 @@ const Footer = (props) => {
           <img src="/mail.svg" alt="Email" className="icon" />
         </a>
       </div>
-      <div className="container-fluid footer footer-dark">
-        <div className="row">
+      <div className="footer bottom invert-selection">
+        <div className="row m-0">
           <div className="col-12 col-sm-2 d-none d-sm-block my-2">
             <img src="./tes.gif" alt="" />
           </div>

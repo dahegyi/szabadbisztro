@@ -54,31 +54,23 @@ const Content = (props) => {
 
         {/*  Restaurant selector */}
         {restaurant === 0 ? (
-          <div className="col">
-            <button
-              className="btn btn-primary btn-lg m-3"
-              onClick={() => setRestaurant(1)}
-            >
+          <>
+            <button className="btn m-3" onClick={() => setRestaurant(1)}>
               Szabad Bisztró
             </button>
             <button
               size="lg"
-              className="btn btn-primary btn-lg m-3"
+              className="btn m-3"
               onClick={() => setRestaurant(2)}
             >
               Új Hely
             </button>
-          </div>
+          </>
         ) : (
           <div className="container">
-            <div className="row mb-3">
-              <button
-                className="btn btn-link btn-lg mb-5"
-                onClick={() => setRestaurant(0)}
-              >
-                &laquo; {cms.back_to_choose_restaurant}
-              </button>
-            </div>
+            <button className="btn link mb-5" onClick={() => setRestaurant(0)}>
+              &laquo; {cms.back_to_choose_restaurant}
+            </button>
             <div className="row mb-5">
               <div className="col-12 col-md-6">
                 <img
@@ -149,8 +141,8 @@ const Content = (props) => {
 
       {/*  Table reservation */}
       {restaurant > 0 && (
-        <div className="contact-container">
-          <div id="contact" className="reservation">
+        <div className="contact-container invert-selection">
+          <div className="reservation">
             <PrismicRichText field={cms.table_reservation_title} />
 
             <a

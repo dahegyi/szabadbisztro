@@ -10,7 +10,6 @@
 
 @import "bootstrap/scss/grid";
 @import "bootstrap/scss/containers";
-@import "bootstrap/scss/buttons";
 
 @import "swiper/css";
 @import "swiper/css/navigation";
@@ -29,8 +28,9 @@ $yellow: #ffff66;
     url("./Urania_Czech.woff") format("woff");
 }
 
-$bg-text-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
-$bg-text-shadow-small: 0 2px 5px #00000090;
+$text-shadow: 0 2px 10px #000000dd;
+$box-shadow-top: 0 -2px 6px -2px #000000cc;
+$box-shadow-bottom: 0 2px 6px -2px #000000cc;
 
 body {
   color: #000;
@@ -38,6 +38,7 @@ body {
   font-size: 1.2rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 
   @include media-breakpoint-down(md) {
     font-size: 1rem;
@@ -60,34 +61,48 @@ a:hover {
   text-decoration: none;
 }
 
-.btn {
-  transition-duration: 0s;
+iframe {
+  user-select: none;
+}
 
-  &.btn-primary {
-    border: 3px dashed #000000;
-    border-radius: 0;
-    background: #ffffff;
-    color: #000000;
+.btn {
+  min-width: 180px;
+  padding: 0.8rem 2.5rem;
+  border: 3px dashed #000000;
+  background: #ffffff;
+  font-size: 1.1rem;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 1.2rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.25rem;
+  }
+
+  &:hover,
+  &:active {
+    background: mix(#ffffff, $green, 85%);
+    box-shadow: 0 2px 10px #00000060;
+  }
+
+  &.link {
+    border: none;
+    background: none;
+    color: $green;
 
     &:hover,
     &:active {
-      border-color: #000000;
-      background: #eeeeee;
-      color: initial;
-    }
-  }
-
-  &.btn-link {
-    color: $green;
-
-    &:hover {
+      box-shadow: none;
       color: $green-dark;
     }
   }
+}
 
-  &.btn-lg {
-    min-width: 160px;
-  }
+:focus-visible {
+  outline-color: $green-dark;
 }
 
 nav {
@@ -102,7 +117,7 @@ nav {
   font-size: 1.4rem;
   text-align: center;
   text-transform: uppercase;
-  transition: all 0.3s ease-in-out;
+  transition: all 10s ease-in-out;
   user-select: none;
 
   ul {
@@ -128,7 +143,7 @@ nav {
       animation: fadeIn 0.3s forwards;
       color: #ffffff;
       opacity: 0;
-      text-shadow: $bg-text-shadow;
+      text-shadow: $text-shadow;
 
       $delayIncrement: 0.3s;
 
@@ -149,12 +164,10 @@ nav {
 
   @include media-breakpoint-down(md) {
     &.open {
-      top: -50%;
-      right: -50%;
-      bottom: -50%;
-      left: -50%;
-      width: 200vmax;
-      height: 200vmax;
+      // top: -50%;
+      // left: -50%;
+      width: max(100vw, 100vh);
+      height: max(100vw, 100vh);
       backdrop-filter: blur(8px);
 
       ul {
@@ -214,9 +227,9 @@ nav {
   width: 41px;
   height: 41px;
   border-radius: 50%;
-  margin: 1.5rem;
+  margin: 1.4rem;
   background: #ffffff;
-  box-shadow: 0 2px 10px #00000030;
+  box-shadow: $box-shadow-bottom;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
 
@@ -295,7 +308,7 @@ nav {
     top: max(35%, 130px);
     width: 100%;
     text-align: center;
-    text-shadow: $bg-text-shadow;
+    text-shadow: $text-shadow;
 
     @include media-breakpoint-down(sm) {
       font-size: calc(1.1rem + 1.5vw);
@@ -305,20 +318,24 @@ nav {
 
 .about {
   background-image: url("plant.png");
-  background-position: bottom;
+  background-position: top;
   background-repeat: no-repeat;
-  background-size: contain;
+  box-shadow: inset 0 0 80px 90px #ffffff;
 
   h1 {
     margin-bottom: 2rem;
   }
 
   p {
-    padding: 0 6rem;
+    padding: 0;
     text-align: justify;
 
-    @include media-breakpoint-down(md) {
-      padding: 0;
+    @include media-breakpoint-up(md) {
+      padding: 0 3rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding: 0 6rem;
     }
   }
 }
@@ -334,15 +351,16 @@ nav {
   padding: 0;
   color: #ffffff;
   text-align: center;
-  text-shadow: $bg-text-shadow-small;
+  text-shadow: $text-shadow;
 
   .reservation,
   .opening-hours {
     padding: 3rem 1rem;
+    box-shadow: $box-shadow-top;
   }
 
   .reservation {
-    background: $green;
+    background: url(./reservation-pattern.svg);
     font-size: 1.6rem;
 
     .phone-number {
@@ -355,7 +373,7 @@ nav {
   }
 
   .opening-hours {
-    background: $green-dark;
+    background: url(./opening-hours-pattern.svg);
     font-size: 1.2rem;
 
     @include media-breakpoint-down(md) {
@@ -370,8 +388,33 @@ nav {
   --swiper-theme-color: #000000;
   --swiper-pagination-bullet-inactive-color: #000000;
 
+  .swiper-button {
+    &-prev,
+    &-next {
+      top: 0;
+      height: 100%;
+      margin: 0;
+    }
+  }
+
+  &:not(.image-slideshow) {
+    .swiper-button {
+      &-prev {
+        right: auto;
+        left: 0;
+        background: linear-gradient(to right, #ffffff, transparent);
+      }
+
+      &-next {
+        right: 0;
+        left: auto;
+        background: linear-gradient(to left, #ffffff, transparent);
+      }
+    }
+  }
+
   .swiper-slide {
-    padding: 2rem 3rem;
+    padding: 2rem;
   }
 
   @include media-breakpoint-up(md) {
@@ -396,11 +439,14 @@ nav {
   &.image-slideshow {
     --swiper-theme-color: #ffffff;
     --swiper-pagination-bullet-inactive-color: #ffffff;
-    height: 85vmin;
 
+    height: 85vmin;
     min-height: 300px;
     max-height: 650px;
     border-radius: 15px;
+    box-shadow: $box-shadow-bottom;
+    text-shadow: $text-shadow;
+    user-select: none;
 
     .swiper-slide {
       padding: 0;
@@ -434,38 +480,58 @@ nav {
   }
 
   .blockquote {
-    font-size: 1rem;
+    p {
+      padding: 1rem 0;
+      color: $green-dark;
+      font-size: 1.2rem;
+      text-align: right;
+    }
 
     @include media-breakpoint-up(md) {
-      font-size: 1.3rem;
+      h2 {
+        padding: 0 2rem;
+      }
+
+      p {
+        font-size: 1.5rem;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      h2 {
+        padding: 0 6rem;
+      }
     }
   }
 }
 
 .footer {
   width: 100%;
+  box-shadow: $box-shadow-top;
   color: #ddd;
   text-align: center;
-  user-select: none;
 
-  .icon {
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    margin: 6px 4px;
-    filter: invert(90%);
-  }
-
-  &.footer-light {
-    height: 100px;
-    padding: 30px;
+  &.top {
     background: $green;
+    user-select: none;
+
+    img {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin: 5px;
+      filter: invert(100%);
+    }
   }
 
-  &.footer-dark {
-    min-height: 180px;
-    padding: 55px;
-    background: $green-dark;
+  &.bottom {
+    padding: 55px 0;
+    background: url(./footer-pattern.svg);
+    text-shadow: $text-shadow;
+
+    @include media-breakpoint-up(md) {
+      padding: 55px;
+    }
   }
 
   img {
@@ -488,4 +554,18 @@ nav {
 ::selection {
   background-color: $green-dark;
   color: white;
+}
+
+.invert-selection {
+  ::-moz-selection {
+    background-color: white;
+    color: $green-dark;
+    text-shadow: none;
+  }
+
+  ::selection {
+    background-color: white;
+    color: $green-dark;
+    text-shadow: none;
+  }
 }

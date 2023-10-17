@@ -22,7 +22,7 @@ const MediaSlideshow = (props) => {
       >
         {cms.articles.map((article, index) => (
           <SwiperSlide key={index}>
-            <blockquote className="blockquote text-left">
+            <blockquote className="blockquote">
               <PrismicRichText field={article.article_title} />
               <PrismicRichText field={article.article_content} />
             </blockquote>
