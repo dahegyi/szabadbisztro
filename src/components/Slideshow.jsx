@@ -42,8 +42,6 @@ const Slideshow = (props) => {
     setSlideshowTexts([texts && texts[rand1].text, texts && texts[rand2].text]);
   }, [cms]);
 
-  const dispatch = useDispatch();
-
   const navbar = useRef(null);
   const [isTogglerChecked, setIsTogglerChecked] = useState(false);
 
@@ -52,6 +50,13 @@ const Slideshow = (props) => {
     navbar.current.classList.toggle("open");
 
     setIsTogglerChecked(!isTogglerChecked);
+  };
+
+  const dispatch = useDispatch();
+
+  const changeLanguage = () => {
+    toggleNavigation();
+    dispatch(switchLanguage());
   };
 
   const [slideshowTextStyle, setSlideshowTextStyle] = useState();
@@ -109,7 +114,7 @@ const Slideshow = (props) => {
             </Link>
           </li>
           <li>
-            <a onClick={() => dispatch(switchLanguage())}>{cms.change_lang}</a>
+            <a onClick={changeLanguage}>{cms.change_lang}</a>
           </li>
         </ul>
       </nav>

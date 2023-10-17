@@ -487,6 +487,8 @@ nav {
       color: $green-dark;
       font-size: 1.2rem;
       text-align: right;
+      text-decoration: underline;
+      text-underline-offset: 0.2rem;
     }
 
     @include media-breakpoint-up(md) {
