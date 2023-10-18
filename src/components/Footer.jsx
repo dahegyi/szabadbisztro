@@ -1,17 +1,19 @@
 import PropTypes from "prop-types";
 
 const Footer = (props) => {
-  const { cms, restaurant } = props;
+  const { cms, restaurant, sendEvent } = props;
 
   Footer.propTypes = {
     cms: PropTypes.object.isRequired,
     restaurant: PropTypes.number.isRequired,
+    sendEvent: PropTypes.func.isRequired,
   };
 
   return (
     <>
       <div className="footer top mt-3 py-4">
         <a
+          onClick={() => sendEvent("contact_open_facebook")}
           href="https://facebook.com/Szabad.vegan.bistro"
           target="_blank"
           rel="noreferrer"
@@ -19,6 +21,7 @@ const Footer = (props) => {
           <img src="/facebook.svg" alt="Facebook" className="icon" />
         </a>
         <a
+          onClick={() => sendEvent("contact_open_instagram")}
           href="https://instagram.com/szabad_vegan_bistro"
           target="_blank"
           rel="noreferrer"
@@ -26,6 +29,7 @@ const Footer = (props) => {
           <img src="/instagram.svg" alt="Instagram" className="icon" />
         </a>
         <a
+          onClick={() => sendEvent("contact_open_email")}
           href="mailto:szabadbisztro@gmail.com"
           target="_blank"
           rel="noreferrer"
@@ -42,6 +46,7 @@ const Footer = (props) => {
             {restaurant > 0 && (
               <h5 className="my-0">
                 <a
+                  onClick={() => sendEvent(`footer_open_maps_${restaurant}`)}
                   href={`https://maps.app.goo.gl/${
                     restaurant === 1 ? "mKPfno5DuBWzaSmE6" : "DjyYWbFpQbpYkbVr6"
                   }

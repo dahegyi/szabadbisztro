@@ -7,18 +7,19 @@ import { Link } from "react-scroll";
 import { switchLanguage } from "../reducers/language-switcher";
 
 const Header = (props) => {
-  const { cms, restaurant } = props;
+  const { cms, restaurant, sendEvent } = props;
 
   Header.propTypes = {
     cms: PropTypes.object.isRequired,
     restaurant: PropTypes.number.isRequired,
+    sendEvent: PropTypes.func.isRequired,
   };
 
   const [headerStyles, setHeaderStyles] = useState({});
   const [headerTexts, setHeaderTexts] = useState([]);
 
   useEffect(() => {
-    // Select and set random images as a style
+    // Select and set random image as a style
     const imgs = cms.slideshow_images;
     const headerImage =
       imgs && imgs[Math.floor(Math.random() * imgs.length)].slideshow_image;
@@ -52,10 +53,22 @@ const Header = (props) => {
     setIsTogglerChecked(!isTogglerChecked);
   };
 
+  const closeNavigation = () => {
+    document.querySelector("body").classList.remove("overflow-hidden");
+    navbar.current.classList.remove("open");
+
+    setIsTogglerChecked(false);
+  };
+
+  const handleScroll = (target) => {
+    closeNavigation();
+    sendEvent(`scroll_to_${target}`);
+  };
+
   const dispatch = useDispatch();
 
   const changeLanguage = () => {
-    toggleNavigation();
+    closeNavigation();
     dispatch(switchLanguage());
   };
 
@@ -81,7 +94,7 @@ const Header = (props) => {
               smooth={true}
               offset={-50}
               duration={150}
-              onClick={toggleNavigation}
+              onClick={() => handleScroll("about")}
             >
               {cms.about}
             </Link>
@@ -92,7 +105,7 @@ const Header = (props) => {
               smooth={true}
               offset={-50}
               duration={150}
-              onClick={toggleNavigation}
+              onClick={() => handleScroll("menu")}
             >
               {cms.menu}
             </Link>
@@ -108,7 +121,9 @@ const Header = (props) => {
               smooth={true}
               offset={restaurant ? 0 : -50}
               duration={150}
-              onClick={toggleNavigation}
+              onClick={() =>
+                handleScroll(restaurant ? "contact" : "menu_norestaurant")
+              }
             >
               {cms.contact}
             </Link>

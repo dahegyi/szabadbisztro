@@ -6,12 +6,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Keyboard } from "swiper/modules";
 
 const Content = (props) => {
-  const { cms, restaurant, setRestaurant } = props;
+  const { cms, restaurant, setRestaurant, sendEvent } = props;
 
   Content.propTypes = {
     cms: PropTypes.object.isRequired,
     restaurant: PropTypes.number.isRequired,
     setRestaurant: PropTypes.func.isRequired,
+    sendEvent: PropTypes.func.isRequired,
+  };
+
+  const chooseRestaurant = (restaurant) => {
+    sendEvent(`contact_choose_restaurant_${restaurant}`);
+    setRestaurant(restaurant);
   };
 
   return (
@@ -55,13 +61,13 @@ const Content = (props) => {
         {/*  Restaurant selector */}
         {restaurant === 0 ? (
           <>
-            <button className="btn m-3" onClick={() => setRestaurant(1)}>
+            <button className="btn m-3" onClick={() => chooseRestaurant(1)}>
               Szabad Bisztró
             </button>
             <button
               size="lg"
               className="btn m-3"
-              onClick={() => setRestaurant(2)}
+              onClick={() => chooseRestaurant(2)}
             >
               Új Hely
             </button>
@@ -146,6 +152,7 @@ const Content = (props) => {
             <PrismicRichText field={cms.table_reservation_title} />
 
             <a
+              onClick={() => sendEvent(`contact_open_maps_${restaurant}`)}
               href={`https://maps.app.goo.gl/${
                 restaurant === 1 ? "ZWda2yxCHYWXnHQ5A" : "DjyYWbFpQbpYkbVr6"
               }`}
@@ -158,6 +165,7 @@ const Content = (props) => {
             <br />
 
             <a
+              onClick={() => sendEvent(`contact_bell_number_${restaurant}`)}
               href={`tel:${
                 restaurant === 1 ? cms.phone_number : cms.ujhely_phone_number
               }`}

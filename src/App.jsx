@@ -5,6 +5,8 @@ import { useSinglePrismicDocument } from "@prismicio/react";
 import SwiperCore from "swiper";
 import { Autoplay } from "swiper/modules";
 
+import ReactGA from "react-ga4";
+
 import Header from "./components/Header";
 import Content from "./components/Content";
 import MediaSlideshow from "./components/MediaSlideshow";
@@ -15,38 +17,51 @@ function App() {
     lang: useSelector((state) => state.languageSwitch.language),
   });
 
-  const data = cms?.data;
+  const cmsData = cms?.data;
 
   useEffect(() => {
     SwiperCore.use([Autoplay]);
   }, []);
 
   useEffect(() => {
-    if (data) {
-      document.title = `${data.app_title} - ${data.app_title_description}`;
+    if (cmsData) {
+      document.title = `${cmsData.app_title} - ${cmsData.app_title_description}`;
     }
-  }, [data]);
+  }, [cmsData]);
 
   const [restaurant, setRestaurant] = useState(0);
+
+  const sendEvent = (event) => {
+    ReactGA.event({
+      category: "User",
+      action: event,
+    });
+  };
 
   return (
     <>
       {state === "loading" ? (
         <img src="./lec.gif" className="loading" alt="nyugi..." />
       ) : (
-        data && (
+        cmsData && (
           <>
-            <Header cms={data} restaurant={restaurant} />
-            <Content
-              cms={data}
+            <Header
+              cms={cmsData}
               restaurant={restaurant}
-              setRestaurant={setRestaurant}
+              sendEvent={sendEvent}
             />
-            <MediaSlideshow cms={data} />
-            <Footer
-              cms={data}
+            <Content
+              cms={cmsData}
               restaurant={restaurant}
               setRestaurant={setRestaurant}
+              sendEvent={sendEvent}
+            />
+            <MediaSlideshow cms={cmsData} />
+            <Footer
+              cms={cmsData}
+              restaurant={restaurant}
+              setRestaurant={setRestaurant}
+              sendEvent={sendEvent}
             />
           </>
         )
