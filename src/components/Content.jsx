@@ -147,7 +147,7 @@ const Content = (props) => {
 
       {/*  Table reservation */}
       {restaurant > 0 && (
-        <div className="contact-container invert-selection">
+        <div name="contact" className="contact-container invert-selection">
           <div className="reservation">
             <PrismicRichText field={cms.table_reservation_title} />
 
