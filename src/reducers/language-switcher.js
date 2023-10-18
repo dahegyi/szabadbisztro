@@ -3,13 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 export const languageSlice = createSlice({
   name: "languageSwitcher",
   initialState: {
-    language: "hu",
+    language: localStorage.getItem("language") || "hu",
   },
   reducers: {
     switchLanguage: (state) => {
       state.language === "hu"
         ? (state.language = "en-gb")
         : (state.language = "hu");
+      localStorage.setItem("language", state.language);
     },
   },
 });

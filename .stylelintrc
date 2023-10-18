@@ -1,0 +1,9 @@
+{
+  "extends": ["stylelint-config-idiomatic-order"],
+  "overrides": [
+    {
+      "files": ["**/*.scss"],
+      "customSyntax": "postcss-scss"
+    }
+  ]
+}
