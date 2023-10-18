@@ -1,7 +1,9 @@
-<div style="display:flex;justify-content:space-between;height:60px;">
-<img src="https://raw.githubusercontent.com/dahegyi/szabadbisztro/master/public/tes.gif" />
-<img src="https://raw.githubusercontent.com/dahegyi/szabadbisztro/master/public/logo.webp" />
-<img src="https://raw.githubusercontent.com/dahegyi/szabadbisztro/master/public/lec.gif" />
+<div align="center" style="text-align:center;">
+<img src="https://raw.githubusercontent.com/dahegyi/szabadbisztro/master/public/tes.gif" height="50" />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<img src="https://raw.githubusercontent.com/dahegyi/szabadbisztro/master/public/logo.webp" height="60" />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<img src="https://raw.githubusercontent.com/dahegyi/szabadbisztro/master/public/lec.gif" height="50" />
 </div>
 
 ---
