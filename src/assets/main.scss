@@ -522,10 +522,12 @@ nav {
 
     img {
       display: inline-block;
-      width: 30px;
-      height: 30px;
-      margin: 5px;
-      filter: invert(100%);
+      width: 40px;
+      padding: 0 6px;
+
+      &:hover {
+        filter: brightness(0.8);
+      }
     }
   }
 
@@ -541,6 +543,22 @@ nav {
 
   img {
     height: 4rem;
+
+    &.rotate {
+      transition: transform 1s;
+    }
+
+    &.lec {
+      &.rotate {
+        transform: rotate(-360deg);
+      }
+    }
+
+    &.tes {
+      &.rotate {
+        transform: rotate(360deg);
+      }
+    }
   }
 }
 
