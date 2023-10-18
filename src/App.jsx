@@ -13,8 +13,10 @@ import MediaSlideshow from "./components/MediaSlideshow";
 import Footer from "./components/Footer";
 
 function App() {
+  const language = useSelector((state) => state.languageSwitch.language);
+
   const [cms, { state }] = useSinglePrismicDocument("szabad_bisztro", {
-    lang: useSelector((state) => state.languageSwitch.language),
+    lang: language,
   });
 
   const cmsData = cms?.data;
@@ -35,7 +37,7 @@ function App() {
     ReactGA.event({
       category: "User",
       action: event,
-      label: state.languageSwitch.language,
+      label: language,
     });
   };
 
