@@ -1,13 +1,17 @@
 {
   "name": "szabadbisztro",
   "version": "2.0.0",
+  "private": true,
+  "homepage": "https://szabadbisztro.hu",
+  "author": "dahegyi",
+  "license": "UNLICENSED",
   "scripts": {
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0 && stylelint 'src/**/*.{css,scss}'",
-    "lint:fix": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0 --fix && stylelint 'src/**/*.{css,scss}' --fix",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0 && stylelint 'src/**/*.{css,scss}'",
+    "lint:fix": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0 --fix && stylelint 'src/**/*.{css,scss}' --fix"
   },
   "dependencies": {
     "@prismicio/client": "^7.3.0",
