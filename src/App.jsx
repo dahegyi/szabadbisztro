@@ -35,6 +35,7 @@ function App() {
     ReactGA.event({
       category: "User",
       action: event,
+      label: state.languageSwitch.language,
     });
   };
 
