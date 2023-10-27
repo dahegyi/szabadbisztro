@@ -15,7 +15,7 @@
 
 [![Deploy to Firebase Hosting](https://github.com/dahegyi/szabadbisztro/actions/workflows/firebase-deploy.yml/badge.svg)](https://github.com/dahegyi/szabadbisztro/actions/workflows/firebase-deploy.yml)
 
-[![License: Unlicense](https://img.shields.io/badge/License-Unlicense-black.svg)](https://opensource.org/licenses/MIT)
+[![License: Unlicense](https://img.shields.io/badge/License-Unlicense-black.svg)](https://en.wikipedia.org/wiki/Unlicense)
 
 Live website available at [szabadbisztro.hu](https://szabadbisztro.hu)
 
