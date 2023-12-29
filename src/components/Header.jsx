@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
 import { Link } from "react-scroll";
