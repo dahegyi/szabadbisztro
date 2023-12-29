@@ -15,6 +15,8 @@ const Content = (props) => {
     sendEvent: PropTypes.func.isRequired,
   };
 
+  const mappedRestaurants = [undefined, "Szabad Bisztró", "Új Hely"];
+
   const chooseRestaurant = (restaurant) => {
     sendEvent(`contact_choose_restaurant_${restaurant}`);
     setRestaurant(restaurant);
@@ -61,19 +63,23 @@ const Content = (props) => {
         {/*  Restaurant selector */}
         {restaurant === 0 ? (
           <>
-            <button className="btn m-3" onClick={() => chooseRestaurant(1)}>
-              Szabad Bisztró
-            </button>
-            <button
-              size="lg"
-              className="btn m-3"
-              onClick={() => chooseRestaurant(2)}
-            >
-              Új Hely
-            </button>
+            {mappedRestaurants.map(
+              (restaurant, i) =>
+                restaurant && (
+                  <button
+                    key={i}
+                    className="btn m-3"
+                    onClick={() => chooseRestaurant(i)}
+                  >
+                    {restaurant}
+                  </button>
+                ),
+            )}
           </>
         ) : (
           <div className="container">
+            <h3 className="mb-3">{mappedRestaurants[restaurant]}</h3>
+
             <button className="btn link mb-5" onClick={() => setRestaurant(0)}>
               &laquo; {cms.back_to_choose_restaurant}
             </button>
